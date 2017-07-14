@@ -2,8 +2,18 @@ package com.example.android.tic_tac_toe;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
+    public void drop (View view) {
+
+        ImageView counter = (ImageView)view;
+        counter.setTranslationY(-1000f);
+        counter.setTranslationX(-1000f);
+        counter.setImageResource(R.drawable.yellow);
+        counter.animate().translationYBy(1000f).translationXBy(1000f).setDuration(300);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
