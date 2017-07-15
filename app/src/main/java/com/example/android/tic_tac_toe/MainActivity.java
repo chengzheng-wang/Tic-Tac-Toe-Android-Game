@@ -51,6 +51,19 @@ public class MainActivity extends AppCompatActivity {
                     winnerLayout.setVisibility(View.VISIBLE);
                     isActive = false;
                     break;
+                } else {
+                    boolean isTie = true;
+                    for (int cur : checked) {
+                        if (cur == 2) {
+                            isTie = false;
+                            break;
+                        }
+                    }
+                    if (isTie) {
+                        winnerLayout.setBackgroundColor(Color.WHITE);
+                        whoWins.setText("Tie! Try again!");
+                        winnerLayout.setVisibility(View.VISIBLE);
+                    }
                 }
             }
         }
