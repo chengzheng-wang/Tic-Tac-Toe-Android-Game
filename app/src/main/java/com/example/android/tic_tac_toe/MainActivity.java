@@ -17,12 +17,12 @@ public class MainActivity extends AppCompatActivity {
     int colour = 0;
     int[] checked = {2,2,2,2,2,2,2,2,2};
     int[][] winner = {{0,1,2},{3,4,5},{6,7,8},{0,3,6},{1,4,7},{2,5,8},{0,4,8},{2,4,6}};
-
+    boolean isActive = true;
     public void drop (View view) {
 
         ImageView counter = (ImageView)view;
         int tag = Integer.parseInt(counter.getTag().toString());
-        if (checked[tag] == 2) {
+        if (checked[tag] == 2 && isActive) {
             //counter.setTranslationY(-1000f);
             //counter.setTranslationX(-1000f);
             counter.setAlpha(0f);
@@ -43,17 +43,20 @@ public class MainActivity extends AppCompatActivity {
                     winnerLayout.setBackgroundColor(Color.RED);
                     whoWins.setText("Red is Winner");
                     winnerLayout.setVisibility(View.VISIBLE);
+                    isActive = false;
                     break;
                 } else if (checked[winner[i][0]] == 1 && checked[winner[i][1]] == 1 && checked[winner[i][2]] == 1){
                     winnerLayout.setBackgroundColor(Color.YELLOW);
                     whoWins.setText("Yellow is Winner");
                     winnerLayout.setVisibility(View.VISIBLE);
+                    isActive = false;
                     break;
                 }
             }
         }
     }
     public void playAgain (View view) {
+        isActive = true;
         colour = 0;
         Arrays.fill(checked, 2);
         LinearLayout winnerLayout = (LinearLayout)findViewById(R.id.winnerLinearLayout);
