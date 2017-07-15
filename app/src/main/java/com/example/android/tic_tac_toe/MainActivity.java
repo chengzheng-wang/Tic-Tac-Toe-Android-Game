@@ -7,27 +7,26 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-    boolean flag = true;
+    //0 is red, 1 is yello, 2 is empty
+    int colour = 0;
+    int[] checked = {2,2,2,2,2,2,2,2,2};
     public void drop (View view) {
 
         ImageView counter = (ImageView)view;
-        counter.setTranslationY(-1000f);
-        counter.setTranslationX(-1000f);
-
-//        int height = counter.getLayoutParams().height;
-//        int width = counter.getLayoutParams().width;
-//        String str = height + " " + width;
-//        Toast.makeText(MainActivity.this, str, Toast.LENGTH_SHORT).show();
-
-        if (flag) {
-            counter.setImageResource(R.drawable.yellow);
-            flag = false;
-        } else {
-            counter.setImageResource(R.drawable.red);
-            flag = true;
+        int tag = Integer.parseInt(counter.getTag().toString());
+        if (checked[tag] == 2) {
+            counter.setTranslationY(-1000f);
+            counter.setTranslationX(-1000f);
+            checked[tag] = colour;
+            if (colour == 0) {
+                counter.setImageResource(R.drawable.red);
+                colour = 1;
+            } else {
+                counter.setImageResource(R.drawable.yellow);
+                colour = 0;
+            }
+            counter.animate().translationYBy(1000f).translationXBy(1000f).setDuration(300);
         }
-
-        counter.animate().translationYBy(1000f).translationXBy(1000f).setDuration(300);
     }
 
     @Override
